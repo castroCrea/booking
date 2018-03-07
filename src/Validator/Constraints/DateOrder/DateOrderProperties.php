@@ -6,14 +6,17 @@
  * Time: 18:00
  */
 
-namespace App\Validator\Constraints\DatePast;
+namespace App\Validator\Constraints\DateOrder;
 
 use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
  */
-class DatePastProperties extends Constraint
+class DateOrderProperties extends Constraint
 {
-    public $message = 'The date selected is past';
+    /**
+     * @var string
+     */
+    public $message = 'The departured date is earlier than the arrival date';
 }

@@ -6,21 +6,30 @@
  * Time: 18:06
  */
 
-namespace App\Validator\Constraints\DatePast;
+namespace App\Validator\Constraints\PaxRoom;
 
 use App\Validator\Constraints\DatePast\DatePastProperties;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class DatePastPropertiesValidator extends ConstraintValidator
+/**
+ * Class PaxRoomPropertiesValidator
+ * @package App\Validator\Constraints\PaxRoom
+ */
+class PaxRoomPropertiesValidator extends ConstraintValidator
 {
+    /**
+     * look if the number of pax is not higher than the available sleep un the room
+     *
+     * @param mixed $value
+     * @param Constraint $constraint
+     */
     public function validate($value, Constraint $constraint)
     {
-        $date = $value;
-        $now = new \DateTime();
+        $availableSleep = $this->context->getObject()->getRoom()->getAvailableSleeps();
 
-        if($date < $now) {
+        if($availableSleep < $value) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }

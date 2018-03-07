@@ -6,15 +6,15 @@
  * Time: 18:00
  */
 
-namespace App\Validator\Constraints;
+namespace App\Validator\Constraints\DateBooking;
 
 use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
  */
-class DatePastProperties extends Constraint
+class DateBookingProperties extends Constraint
 {
     public $message = 'The Rooms is not avalable at this date';
-    public $messageDatePast = 'The date selected is past';
+    public $messageFormat = 'Wrong date format';
 }

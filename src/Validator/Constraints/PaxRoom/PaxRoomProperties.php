@@ -6,14 +6,14 @@
  * Time: 18:00
  */
 
-namespace App\Validator\Constraints\DatePast;
+namespace App\Validator\Constraints\PaxRoom;
 
 use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
  */
-class DatePastProperties extends Constraint
+class PaxRoomProperties extends Constraint
 {
-    public $message = 'The date selected is past';
+    public $message = 'The pax is higher than the room capacity';
 }
