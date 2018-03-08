@@ -38,10 +38,10 @@ class FeatureContext implements Context
         $this->application->setAutoExit(false);
     }
     /**
-     * @When a test Data base is set
+     * @BeforeScenario
      * Create
      */
-    public function aTestDataBaseIsSet()
+    public function before()
     {
         $input = new \Symfony\Component\Console\Input\ArrayInput(array(
             'command' => 'doctrine:schema:update',
@@ -53,9 +53,9 @@ class FeatureContext implements Context
     }
 
     /**
-     * @Then the test Data base is drop
+     * @AfterScenario
      */
-    public function theTestDataBaseIsDrop()
+    public function after()
     {
         $input = new \Symfony\Component\Console\Input\ArrayInput(array(
             'command' => 'doctrine:schema:drop',
