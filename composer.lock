@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "de8a881e8c379b48dc90c6b88b1d49be",
+    "content-hash": "52aa4c1bbcdb5e8306d2807d5b1647b9",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -3478,7 +3478,7 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v4.0.5",
+            "version": "v4.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
