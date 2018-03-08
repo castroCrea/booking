@@ -43,10 +43,7 @@ class BookingsRepository extends ServiceEntityRepository
         $departureDateClone = clone $departureDate;
 
         $return = $this->createQueryBuilder('b')
-            ->where('b.arrivalDate >= :arrivalDate')
-            ->andWhere('b.arrivalDate < :departureDate')
-            ->andWhere('b.departureDate > :arrivalDate')
-            ->andWhere('b.departureDate <= :departureDate')
+            ->where('(b.arrivalDate >= :arrivalDate AND b.arrivalDate < :departureDate) OR (b.departureDate > :arrivalDate AND b.departureDate <= :departureDate)')
             ->andWhere('b.room = :room')
             ->setParameters([
                 'arrivalDate' => $arrivalDateClone,
