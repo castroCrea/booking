@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,23 +13,31 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository
+class UserRepository extends ServiceEntityRepository implements UserLoaderInterface
 {
+    /**
+     * UserRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, User::class);
     }
 
-    /*
-    public function findBySomething($value)
+    /**
+     * Load user by username or email
+     *
+     * @param string $username
+     * @return mixed|null|\Symfony\Component\Security\Core\User\UserInterface
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function loadUserByUsername($username)
     {
         return $this->createQueryBuilder('u')
-            ->where('u.something = :value')->setParameter('value', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('u.username = :username OR u.email = :email')
+            ->setParameter('username', $username)
+            ->setParameter('email', $username)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
 }

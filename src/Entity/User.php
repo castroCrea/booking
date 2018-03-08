@@ -104,8 +104,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            // see section on salt below
-            // $this->salt,
+            $this->isActive,
         ));
     }
 
@@ -116,8 +115,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            // see section on salt below
-            // $this->salt
+            $this->isActive,
             ) = unserialize($serialized);
     }
 
@@ -151,5 +149,37 @@ class User implements UserInterface, \Serializable
     public function setIsActive($isActive): void
     {
         $this->isActive = $isActive;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAccountNonExpired()
+{
+    return true;
+}
+
+    /**
+     * @return bool
+     */
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->isActive;
     }
 }
