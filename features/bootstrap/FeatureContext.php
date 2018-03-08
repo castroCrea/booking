@@ -17,32 +17,51 @@ class FeatureContext implements Context
      * @var KernelInterface
      */
     private $kernel;
+    /**
+     * @var \Symfony\Bundle\FrameworkBundle\Console\Application
+     */
+    private $application;
 
     /**
      * @var Response|null
      */
     private $response;
 
+    /**
+     * FeatureContext constructor.
+     * @param KernelInterface $kernel
+     */
     public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+        $this->application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
+        $this->application->setAutoExit(false);
+    }
+    /**
+     * @When a test Data base is set
+     * Create
+     */
+    public function aTestDataBaseIsSet()
+    {
+        $input = new \Symfony\Component\Console\Input\ArrayInput(array(
+            'command' => 'doctrine:schema:update',
+            '--force' => true,
+            '--env' => 'test'
+        ));
+        $output = null;
+        $this->application->run($input, $output);
     }
 
     /**
-     * @When a demo scenario sends a request to :path
+     * @Then the test Data base is drop
      */
-    public function aDemoScenarioSendsARequestTo(string $path)
+    public function theTestDataBaseIsDrop()
     {
-        $this->response = $this->kernel->handle(Request::create($path, 'GET'));
-    }
-
-    /**
-     * @Then the response should be received
-     */
-    public function theResponseShouldBeReceived()
-    {
-        if ($this->response === null) {
-            throw new \RuntimeException('No response received');
-        }
+        $input = new \Symfony\Component\Console\Input\ArrayInput(array(
+            'command' => 'doctrine:schema:drop',
+            '--force' => true
+        ));
+        $output = null;
+        $this->application->run($input, $output);
     }
 }
