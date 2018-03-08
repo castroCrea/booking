@@ -4,10 +4,16 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ApiResource(attributes={
+ *     "normalization_context"={"groups"={"user", "user-read"}},
+ *     "denormalization_context"={"groups"={"user", "user-write"}}
+ * })
  */
 class User implements UserInterface, \Serializable
 {
@@ -19,21 +25,25 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
+     * @Groups({"user"})
      * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
 
     /**
+     * @Groups({"user-write"})
      * @ORM\Column(type="string", length=64)
      */
     private $password;
 
     /**
+     * @Groups({"user"})
      * @ORM\Column(type="string", length=60, unique=true)
      */
     private $email;
 
     /**
+     * @Groups({"user"})
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -88,6 +98,15 @@ class User implements UserInterface, \Serializable
     public function getRoles()
     {
         return array('ROLE_USER');
+    }
+
+    /**
+     * @param null|UserInterface $user
+     * @return bool
+     */
+    public function isUser(?UserInterface $user = null): bool
+    {
+        return $user instanceof self && $user->id === $this->id;
     }
 
     /**
