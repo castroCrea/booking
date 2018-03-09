@@ -23,10 +23,10 @@
 * Try to reset the same booking (and looking for validation error)
 * Try to set a booking during the date of the previous booking (and looking for the validation error)
 * Try to set a booking when arrival date egal departure date than the booking before (See if it validated)
+* Try to set a number of pax higher than the sleeps availabel on the room (See if it validated)
+* Try to set booking date on the past (See if it validated)
+* Try to set arrival booking date higer than the departure date (See if it validated)
 
 
 ## TODO Test
 
-* Date past
-* Date departure before arrival
-* To many pax
