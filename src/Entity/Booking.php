@@ -13,7 +13,16 @@ use App\Validator\Constraints\PaxRoom\PaxRoomProperties;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingsRepository")
- * @ApiResource
+ * @ApiResource(
+ *     attributes={
+ *         "filters"={"booking.search_filter"}
+ *     },
+ *     graphql={
+ *         "query"={
+ *              "filters"={"booking.date_filter"}
+ *          }
+ *     }
+ * )
  * @ApiResource(iri="http://schema.org/Reservation")
  */
 class Booking

@@ -33,3 +33,11 @@ services:
         class: App\Validator\Constraints\DateBooking\DateBookingPropertiesValidator
         arguments:
              - "@doctrine.orm.entity_manager"
+
+    booking.date_filter:
+            parent: 'api_platform.doctrine.orm.date_filter'
+            arguments: [ { arrivalDate: ~ } ]
+            tags:  [ 'api_platform.filter' ]
+            autowire: false
+            autoconfigure: false
+            public: false

@@ -104,3 +104,47 @@ http://localhost:8000/api/v1/graphql
 </pre>
 
 GraphQL client side doc : http://graphql.org/graphql-js/graphql-clients/
+
+#### Add filter for the date with graphQL
+
+create filter first 
+
+<pre>
+    booking.date_filter:
+        parent: 'api_platform.doctrine.orm.date_filter'
+        arguments: [ { arrivalDate: ~ } ]
+        tags:  [ 'api_platform.filter' ]
+        autowire: false
+        autoconfigure: false
+        public: false
+</pre>
+
+Then add to entities (here we add for REST and GraphQL(query))
+
+<pre>
+ * @ApiResource(
+ *     attributes={
+ *         "filters"={"booking.search_filter"}
+ *     },
+ *     graphql={
+ *         "query"={
+ *              "filters"={"booking.date_filter"}
+ *          }
+ *     }
+ * )
+</pre>
+
+How to call the filter in query for GraphQL
+
+<pre>
+{
+  bookings(arrivalDate: { before : "2018-05-09T02:00:00+00:00" }) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}
+
+</pre>
