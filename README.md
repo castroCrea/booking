@@ -2,6 +2,10 @@
 
 Vous souhaitez créer **une api** permettant d'effectuer une réservation d'une chambre d'hotel.
 
+### connection url to the admin request
+
+/api/v1
+
 ### Création d'une réservation
 Lors de la réservation, les informations suivantes sont demandées :
 - numéro de la chambre
@@ -70,4 +74,33 @@ Lors de la réservation, les informations suivantes sont demandées :
 * Entities
 * Data Validation
 
+### HOW TO USE GRAPHQL
 
+You can test it with /api/v1/graphql
+
+NB: you need to have entry in your DDB
+
+You can test in in JS with you console 
+
+<pre>
+var xhr = new XMLHttpRequest();
+xhr.responseType = 'json';
+xhr.open("POST", "http://localhost:8000/api/v1/graphql");
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader("Accept", "application/json");
+xhr.onload = function () {
+  console.log('data returned:', xhr.response);
+}
+xhr.send(JSON.stringify({query: '{ room(id: "/api/v1/rooms/1") { id, number }}'}));
+</pre>
+
+Or try in command line
+
+<pre>
+curl -X POST \
+-H "Content-Type: application/json" \
+-d '{"query": "{ room(id: /api/v1/rooms/1) { id, number }}"}' \
+http://localhost:8000/api/v1/graphql
+</pre>
+
+GraphQL client side doc : http://graphql.org/graphql-js/graphql-clients/
