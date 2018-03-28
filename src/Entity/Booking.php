@@ -16,7 +16,7 @@ use App\Validator\Constraints\PaxRoom\PaxRoomProperties;
  * @ApiResource
  * @ApiResource(iri="http://schema.org/Reservation")
  */
-class Bookings
+class Booking
 {
     /**
      * @ORM\Id
@@ -27,9 +27,9 @@ class Bookings
 
     /**
      * @Assert\NotBlank
-     * @var Rooms
+     * @var Room
      * Many Booking have One Room.
-     * @ORM\ManyToOne(targetEntity="Rooms", inversedBy="bookings")
+     * @ORM\ManyToOne(targetEntity="Room", inversedBy="bookings")
      * @ORM\JoinColumn(name="booking_id", referencedColumnName="id")
      */
     private $room;

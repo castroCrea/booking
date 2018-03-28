@@ -8,7 +8,7 @@
 
 namespace App\Validator\Constraints\DateBooking;
 
-use App\Entity\Bookings;
+use App\Entity\Booking;
 use App\Validator\Constraints\DateBooking\DateBookingProperties;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Validator\Constraint;
@@ -35,7 +35,7 @@ class DateBookingPropertiesValidator extends ConstraintValidator
     }
 
     /**
-     * user only on dateArrival (Entity Bookings)
+     * user only on dateArrival (Entity Booking)
      * We look the format on the value
      * we check here if the room is available at this date buy taking all the booking form this date and looking if there is a booking
      *
@@ -52,7 +52,7 @@ class DateBookingPropertiesValidator extends ConstraintValidator
         $departurDate = $this->context->getObject()->getDepartureDate();
         $room = $this->context->getObject()->getRoom();
 
-        $booking = $this->entityManager->getRepository(Bookings::class)->findByDateRangeForRoom($arrivalDate, $departurDate, $room);
+        $booking = $this->entityManager->getRepository(Booking::class)->findByDateRangeForRoom($arrivalDate, $departurDate, $room);
 
         if(!empty($booking)) {
             $this->context->buildViolation($constraint->message)->addViolation();

@@ -15,6 +15,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class DateBookingProperties extends Constraint
 {
-    public $message = 'The Rooms is not avalable at this date';
+    public $message = 'The Room is not avalable at this date';
     public $messageFormat = 'Wrong date format';
 }

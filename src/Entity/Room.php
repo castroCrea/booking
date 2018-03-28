@@ -10,10 +10,10 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RoomRepository")
- * @ApiResource
+ * @ApiResource()
  * @ApiResource(iri="http://schema.org/HotelRoom, http://schema.org/BedDetails")
  */
-class Rooms
+class Room
 {
     /**
      * @ORM\Id
@@ -61,14 +61,14 @@ class Rooms
     private $comment;
 
     /**
-     * @var Bookings[]
-     * One Room has Many Bookings.
-     * @ORM\OneToMany(targetEntity="Bookings", mappedBy="room")
+     * @var Booking[]
+     * One Room has Many Booking.
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="room")
      */
     private $bookings;
 
     /**
-     * Rooms constructor.
+     * Room constructor.
      */
     public function __construct()
     {
@@ -172,18 +172,18 @@ class Rooms
     }
 
     /**
-     * @param Bookings $bookings
-     * @return Bookings
+     * @param Booking $bookings
+     * @return Booking
      */
-    public function addBookings(Bookings $bookings){
+    public function addBookings(Booking $bookings){
         $this->bookings[] = $bookings;
         return $bookings;
     }
 
     /**
-     * @param Bookings $bookings
+     * @param Booking $bookings
      */
-    public function removeBooking(Bookings $bookings)
+    public function removeBooking(Booking $bookings)
     {
         $this->bookings->removeElement($bookings) ;
     }

@@ -16,7 +16,8 @@
         "symfony/lts": "^4@dev",
         "symfony/security-bundle": "^4.0",
         "symfony/validator": "^4.0",
-        "symfony/yaml": "^4.0"
+        "symfony/yaml": "^4.0",
+        "webonyx/graphql-php": "^0.11.5"
     },
     "require-dev": {
         "behat/mink": "^1.7",

@@ -21,7 +21,7 @@ class DateOrderPropertiesValidator extends ConstraintValidator
 {
     /**
      * send error if date of departure is low than date of arrival
-     * only on Arrival Data (Bookings Entity)
+     * only on Arrival Data (Booking Entity)
      *
      * @param mixed $value
      * @param Constraint $constraint
