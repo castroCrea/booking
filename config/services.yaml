@@ -41,3 +41,11 @@ services:
             autowire: false
             autoconfigure: false
             public: false
+
+    booking.search_filter:
+            parent: 'api_platform.doctrine.orm.numeric_filter'
+            arguments: [ { numberOfPax: ~ } ]
+            tags:  [ 'api_platform.filter' ]
+            autowire: false
+            autoconfigure: false
+            public: false
